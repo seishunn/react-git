@@ -1,0 +1,58 @@
+.repository {
+  border-radius: 8px;
+  text-decoration: none;
+  padding: 5px;
+  box-shadow: 0 5px 5px 3px rgba(0, 0, 0, .04);
+  border-top: 1px solid rgba(0, 0, 0, .04);
+  cursor: pointer;
+  overflow: hidden;
+  &_header {
+    display: flex;
+  }
+  &_footer {
+    margin: 10px;
+    font-size: 16px;
+    line-height: 20px;
+    -webkit-line-clamp: 5;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &_avatar {
+    max-width: 50px;
+    max-height: 50px;
+    min-width: 50px;
+    min-height: 50px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  &_info {
+    width: 100%;
+    padding: 0 5px 0 10px;
+  }
+}
+.title {
+  color: royalblue;
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  max-width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.dop_info {
+  font-size: 12px;
+  color: rgba(0, 0, 0, .7);
+}
