@@ -28,7 +28,7 @@ const Main: React.FC = () => {
 
     useEffect(() => {
         dispatch(getRepos(searchValue, currentPage, perPage));
-    }, [currentPage])
+    }, [])
 
     const searchHandler = () => {
         dispatch(setCurrentPage(1));
