@@ -9,6 +9,7 @@ import {reposReducer} from "../../reducers/repos-reducer";
 import Navbar from "../navbar/Navbar";
 import {createPages} from "../../utils/pagesCount";
 import Page from "../page/Page";
+import ErrorC from "../error/ErrorC";
 // Actions
 const {setCurrentPage} = reposReducer.actions;
 
@@ -20,6 +21,7 @@ const Main: React.FC = () => {
     const currentPage = useAppSelector(state => state.repos.currentPage);
     const perPage = useAppSelector(state => state.repos.perPage);
     const totalCount = useAppSelector(state => state.repos.totalCount);
+    const isError = useAppSelector(state => state.repos.isError);
     const pages: number[] = [];
     const pagesCount = Math.ceil(totalCount / perPage);
     createPages(pages, pagesCount, currentPage);
@@ -45,22 +47,25 @@ const Main: React.FC = () => {
                 changeSearchValue={setSearchValue}
                 searchHandler={searchHandler}
             />
-            <div className={cl.repos}>
-                {repos.map(repo => <Repository repo={repo}/>)}
-            </div>
-            <div className={cl.pages}>
-                <Page
-                    style={{marginRight: "10px"}}
-                    page={1}
-                    currentPage={currentPage}
-                    changePage={setCurrentPageHandler}
-                />
-                {pages.map(page => <Page
-                    key={page}
-                    page={page}
-                    currentPage={currentPage}
-                    changePage={setCurrentPageHandler}
-                /> )}
+            <div className={cl.main}>
+                {isError && <ErrorC/>}
+                <div className={cl.repos}>
+                    {repos.map(repo => <Repository repo={repo}/>)}
+                </div>
+                <div className={cl.pages}>
+                    <Page
+                        style={{marginRight: "10px"}}
+                        page={1}
+                        currentPage={currentPage}
+                        changePage={setCurrentPageHandler}
+                    />
+                    {pages.map(page => <Page
+                        key={page}
+                        page={page}
+                        currentPage={currentPage}
+                        changePage={setCurrentPageHandler}
+                    />)}
+                </div>
             </div>
         </div>
     );

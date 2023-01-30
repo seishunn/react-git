@@ -6,7 +6,7 @@ import {IRepo} from "../components/main/repository/Repository";
 import {IContributors} from "../components/card/Card";
 
 // Actions
-const {setRepos, setIsFetching} = reposReducer.actions;
+const {setRepos, setIsFetching, setError} = reposReducer.actions;
 
 const DefaultURL = "https://api.github.com/";
 
@@ -16,9 +16,17 @@ export const getRepos = (searchQuery: string = "stars:%3E1", currentPage: number
     }
 
     return async (dispatch: AppDispatch) => {
-        dispatch(setIsFetching(true))
-        const response = await axios.get(DefaultURL + `search/repositories?q=${searchQuery}&sort=stars&per_page=${perPage}&page=${currentPage}`);
-        dispatch(setRepos(response.data))
+        try {
+            dispatch(setIsFetching(true));
+            const response = await axios.get(DefaultURL + `search/repositories?q=${searchQuery}&sort=stars&per_page=${perPage}&page=${currentPage}`);
+            dispatch(setRepos(response.data));
+        } catch (err: unknown) {
+            dispatch(setError(true));
+            dispatch(setIsFetching(false));
+            setTimeout(() => {
+                dispatch(setError(false));
+            }, 3000);
+        }
     }
 }
 

@@ -1,9 +1,11 @@
+.main {
+  margin-top: 60px;
+}
 .repos {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: 200px;
   gap: 10px;
-  margin-top: 60px;
 }
 
 .pages {

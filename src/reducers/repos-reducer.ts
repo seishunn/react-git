@@ -5,7 +5,8 @@ const initialState = {
     isFetching: false,
     currentPage: 1,
     perPage: 16,
-    totalCount: 0
+    totalCount: 0,
+    isError: false
 };
 
 export const reposReducer = createSlice({
@@ -22,6 +23,9 @@ export const reposReducer = createSlice({
         },
         setCurrentPage(state, action) {
             state.currentPage = action.payload;
+        },
+        setError(state, action) {
+            state.isError = action.payload;
         }
     }
 })
